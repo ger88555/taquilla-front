@@ -20,6 +20,11 @@ module.exports = {
         'react',
         'jest'
     ],
+    'settings': {
+        'react': {
+            'version': 'detect'
+        }
+    },
     'rules': {
         'indent': [
             'error',
