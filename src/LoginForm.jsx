@@ -6,7 +6,7 @@ class LoginForm extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            email: '',
+            usuario: '',
             password: '',
         }
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -24,8 +24,20 @@ class LoginForm extends React.Component {
     handleSubmit(event){
         event.preventDefault()
         this.setState({value: event.target.value})
-    }
-    
+        const state = this.state
+        console.log(state)
+        fetch('http://localhost:3000/users/login', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(state),
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error))
+    } 
     validateForm() {
         return 0
 
@@ -35,26 +47,28 @@ class LoginForm extends React.Component {
         return(
             <div className='Login'>
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Group size='lg' controlId='email'>
-                        <Form.Label>Email</Form.Label>
+                    <Form.Group className='mb-3' controlId='email'>
+                        <Form.Label>Usuario</Form.Label>
                         <Form.Control
                             autoFocus
-                            name='email'
+                            placeholder='Escriba su nombre de usuario aquí.'
+                            name='usuario'
                             type='text'
-                            value={this.state.email}
+                            value={this.state.usuario}
                             onChange={this.handleChange}
                         />
                     </Form.Group>
-                    <Form.Group size='lg' controlId='password'>
-                        <Form.Label>Password</Form.Label>
+                    <Form.Group className='mb-3' controlId='password'>
+                        <Form.Label>Contraseña</Form.Label>
                         <Form.Control
                             name='password' 
+                            placeholder='Contraseña'
                             type='password'
                             value={this.state.password}
                             onChange={this.handleChange}
                         />
                     </Form.Group>
-                    <Button block size='lg' type='submit'>
+                    <Button variant="primary" size='lg' type='submit'>
                         Login
                     </Button>
                 </Form>                       
