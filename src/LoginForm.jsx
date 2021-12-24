@@ -40,7 +40,6 @@ class LoginForm extends React.Component {
     } 
     validateForm() {
         return 0
-
     }
 
     render() {
