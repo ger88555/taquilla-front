@@ -1,6 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+//import login from './services/auth_service'
 
 class LoginForm extends React.Component {
     constructor(props){
@@ -8,6 +9,7 @@ class LoginForm extends React.Component {
         this.state = {
             usuario: '',
             password: '',
+            submited: false,
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -24,20 +26,11 @@ class LoginForm extends React.Component {
     handleSubmit(event){
         event.preventDefault()
         this.setState({value: event.target.value})
-        const state = this.state
-        console.log(state)
-        fetch('http://localhost:3000/users/login', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(state),
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error))
+        this.setState({submited: true})
+        const {usuario, password} =  this.state 
+
     } 
+
     validateForm() {
         return 0
     }
