@@ -1,12 +1,16 @@
-import {configureStore, applyMiddleware} from '@reduxjs/toolkit'
+import { createStore, applyMiddleware } from 'redux'
+import ThunkMiddleware  from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import rootReducer from './reducers'
-import thunk from 'redux-thunk'
+import rootReducer from './_reducers'
 
-const middleware = [thunk];
+const loggerMiddleware = createLogger()
 
-const store  = configureStore({
-    rootReducer
-})
+const store = createStore(
+    rootReducer,
+    applyMiddleware(
+        ThunkMiddleware,
+        loggerMiddleware
+    )
+)
 
 export default store
