@@ -31,7 +31,7 @@ module.exports = {
             4
         ],
         
-      "react/prop-types": "off",
+        'react/prop-types': 'off',
 
         'linebreak-style': [
             'error',
