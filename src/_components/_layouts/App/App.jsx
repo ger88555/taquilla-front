@@ -1,14 +1,12 @@
 import React from 'react'
 import './App.css'
-import {LoginForm} from './LoginForm'
+import { Login } from '../../_views/Login'
 
 
-function App() {
+export const App = () => {
     return (
         <div className="App">
-            <LoginForm/>
+            <Login />
         </div>
     )
 }
-
-export default App
