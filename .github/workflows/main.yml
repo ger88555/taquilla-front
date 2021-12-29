@@ -43,6 +43,8 @@ jobs:
     
     - name: Build App
       run: npm run build
+      env:
+        REACT_APP_API_URL: ${{ secrets.API_URL }}
     
     - name: Rename 'build/' -> 'docs/'
       run: mv build docs
