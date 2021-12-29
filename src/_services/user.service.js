@@ -5,7 +5,7 @@ export const userService = {
 //    logout,
 }
 
-const API_URL = 'http://192.168.0.22:3000/users/login'
+const BASE_URL = process.env.REACT_APP_API_URL + '/users'
 
 function login(usuario, password) {
     const credentials = {
@@ -13,7 +13,7 @@ function login(usuario, password) {
         password
     } 
 
-    return fetch(API_URL, {
+    return fetch(BASE_URL + '/login', {
         method: 'POST',
         mode: 'cors',
         headers: {
