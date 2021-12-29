@@ -23,8 +23,8 @@ const BillboardList = ({ data = [], loading, error, list }) => {
 
     return (
         <CardGroup>
-            {data.map(BillboardItem)}
-        </CardGroup>        
+            {data.map((item, i) => <BillboardItem key={i} {...item} />)}
+        </CardGroup>
     )
 }
 
