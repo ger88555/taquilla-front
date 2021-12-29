@@ -1,3 +1,4 @@
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ger88555/taquilla-front/Node.js%20CI)
 [![codecov](https://codecov.io/gh/ger88555/taquilla-front/branch/master/graph/badge.svg?token=XOBTYD1ZBS)](https://codecov.io/gh/ger88555/taquilla-front)
 
 # taquilla-front
