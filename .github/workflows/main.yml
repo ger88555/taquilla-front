@@ -81,7 +81,7 @@ jobs:
         REACT_APP_API_URL: ${{ secrets.API_URL }}
     
     - name: Run coverage tests
-    - run: npm run coverage
+      run: npm run coverage
         
     - name: Upload to Codecov
       # Skip step on forked repos
