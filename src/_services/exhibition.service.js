@@ -18,6 +18,6 @@ function list(params = {}) {
             return data.data
         })
         .catch(err => (
-            Promise.reject( err.data?.data?.message || 'Hubo un error al realizar la solicitud.' )
+            Promise.reject( err.data?.message || 'Hubo un error al realizar la solicitud.' )
         ))
 }

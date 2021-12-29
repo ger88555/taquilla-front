@@ -51,6 +51,22 @@ describe('When entering the App', () => {
         keepLoading = false
     })
 
+    it('shows error message from exhibitions API', async () => {        
+        // arrange
+        axios.get.mockClear()
+        axios.get.mockImplementationOnce(async () => (
+            generateResponse({ success: false, message: 'An API error message' }, 500)
+        ))
+
+        // act
+        render(<TestApp />)
+
+        // assert
+        await waitFor(() => {
+            expect( screen.getByText(/An API error message/i) ).toBeInTheDocument()
+        })
+    })
+
     describe('and after fetching the Billboard exhibitions', () => {
 
         it('displays their names', async () => {

@@ -28,8 +28,8 @@ function login(usuario, password){
                     
                 },
                 error => {
-                    dispatch(failure(error.toString()))
-                    dispatch(alertActions.error(error.toString()))
+                    dispatch(failure(error))
+                    dispatch(alertActions.error(error))
                 }
             )
     }

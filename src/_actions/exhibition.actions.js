@@ -1,7 +1,6 @@
 import { exhibitionConstants } from '../_constants'
 import { exhibitionService } from '../_services'
 import {history} from '../_helpers/history'
-import { alertActions } from '.'
 
 export const exhibitionActions = {
     list,
@@ -23,8 +22,7 @@ function list(params = {}){
                     
                 },
                 error => {
-                    dispatch(failure(error.toString()))
-                    dispatch(alertActions.error(error.toString()))
+                    dispatch(failure(error))
                 }
             )
     }
