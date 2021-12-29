@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { exhibitions } from './data'
 import { TestApp, generateResponse } from '../__config__'
 import { waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import axios from 'axios'
 
 jest.mock('axios')
@@ -51,19 +52,38 @@ describe('When entering the App', () => {
         keepLoading = false
     })
 
-    it('shows error message from exhibitions API', async () => {        
-        // arrange
-        axios.get.mockClear()
-        axios.get.mockImplementationOnce(async () => (
-            generateResponse({ success: false, message: 'An API error message' }, 500)
-        ))
+    describe('on error', () => {
 
-        // act
-        render(<TestApp />)
+        beforeEach(() => {
+            axios.get.mockClear()
+            axios.get.mockImplementation(async () => (
+                generateResponse({ success: false, message: 'An API error message' }, 500)
+            ))
+        })
 
-        // assert
-        await waitFor(() => {
-            expect( screen.getByText(/An API error message/i) ).toBeInTheDocument()
+        it('shows error message from exhibitions API', async () => {    
+            // act
+            render(<TestApp />)
+    
+            // assert
+            await waitFor(() => {
+                expect( screen.getByText(/An API error message/i) ).toBeInTheDocument()
+            })
+        })
+
+        it('the retry button works', async () => {    
+            // act
+            render(<TestApp />)
+            
+            var button = null
+            await waitFor(() => {
+                expect( button = screen.getByTestId('reload-button') ).toBeInTheDocument()
+            })
+
+            userEvent.click(button)
+    
+            // assert
+            await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(2))
         })
     })
 
