@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/ger88555/taquilla-front/branch/master/graph/badge.svg?token=XOBTYD1ZBS)](https://codecov.io/gh/ger88555/taquilla-front)
+
 # taquilla-front
 Frontend para la Taquilla del Museo, DDSSC grupo S8A.
 
