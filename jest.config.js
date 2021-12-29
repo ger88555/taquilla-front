@@ -82,8 +82,8 @@ module.exports = {
 
     // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
     moduleNameMapper: {
-        '\\.(css|less|sass|scss)$': '<rootDir>/__mocks__/style.js',
-        '\\.(gif|ttf|eot|svg)$': '<rootDir>/__mocks__/file.js'
+        '\\.(css|less|sass|scss)$': '<rootDir>/src/__tests__/__mocks__/style.js',
+        '\\.(gif|ttf|eot|svg)$': '<rootDir>/src/__tests__/__mocks__/file.js'
     },
 
     // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
