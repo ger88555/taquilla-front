@@ -62,7 +62,7 @@ jobs:
         MESSAGE: "Build: ({sha}) {msg}" # The commit message
 
 
-  build:
+  coverage:
 
     runs-on: ubuntu-latest
 
