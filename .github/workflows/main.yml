@@ -75,13 +75,10 @@ jobs:
         cache: 'npm'
     - run: npm ci
     
-    - name: Build App
-      run: npm run build
-      env:
-        REACT_APP_API_URL: ${{ secrets.API_URL }}
-    
     - name: Run coverage tests
       run: npm run coverage
+      env:
+        REACT_APP_API_URL: ${{ secrets.API_URL }}
         
     - name: Upload to Codecov
       # Skip step on forked repos
