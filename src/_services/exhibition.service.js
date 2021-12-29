@@ -1,28 +1,23 @@
+import axios from 'axios'
+
 export const exhibitionService = {
     list,
 }
 
-const BASE_URL = process.env.REACT_APP_API_URL + '/exhibitions'
-
 function list(params = {}) {
 
-
-    return fetch(BASE_URL + '?' + new URLSearchParams(params), {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(res => res.json())
+    return axios
+        .get('/exhibitions', { params })
         .then(res => {
-            if(res.success === false){
-                return Promise.reject(res.message || res)
+            const { data } = res
+            
+            if(data.success === false){
+                return Promise.reject(res)
             }
 
-            return res.data
+            return data.data
         })
         .catch(err => (
-            Promise.reject( err.message || err.statusText )
+            Promise.reject( err.data?.data?.message || 'Hubo un error al realizar la solicitud.' )
         ))
 }

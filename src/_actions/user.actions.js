@@ -2,6 +2,7 @@ import { userConstants } from '../_constants'
 import { userService } from '../_services'
 import {history} from '../_helpers/history'
 import { alertActions} from '.'
+import { setAuth } from '../_helpers/axios-config'
 
 export const userActions = {
     login,
@@ -18,8 +19,11 @@ function login(usuario, password){
 
         userService.login(usuario, password)
             .then(
-                user => {
+                ({ user, token }) => {
+                    localStorage.setItem('user', JSON.stringify(user))
                     dispatch(success(user))
+
+                    setAuth(token)
                     history.push('/')
                     
                 },

@@ -1,8 +1,9 @@
 /**
  * Wrap data into a fetch response
  */
-export const generateResponse = (data) => (
+export const generateResponse = (data, status = 200) => (
     {
-        json: (async () => data)
+        status,
+        data
     }
 )

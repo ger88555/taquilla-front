@@ -3,12 +3,15 @@ import { render, screen } from '@testing-library/react'
 import { exhibitions } from './data'
 import { TestApp, generateResponse } from '../__config__'
 import { waitFor } from '@testing-library/react'
+import axios from 'axios'
+
+jest.mock('axios')
 
 describe('When entering the App', () => {
 
     beforeEach(() => {
-        fetch.resetMocks()
-        fetch.mockImplementation(async () => 
+        axios.get.mockClear()
+        axios.get.mockImplementation(async () => 
             generateResponse({ success: true, data: exhibitions })
         )
     })
@@ -27,8 +30,8 @@ describe('When entering the App', () => {
         var keepLoading = true
         
         // arrange
-        fetch.resetMocks()
-        fetch.mockImplementationOnce(async () => {
+        axios.get.mockClear()
+        axios.get.mockImplementationOnce(async () => {
 
             while (keepLoading) {
                 await new Promise(resolve => setTimeout(resolve, 500))
