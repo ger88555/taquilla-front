@@ -9,6 +9,7 @@ import * as axiosConfig from './_helpers/axios-config'
 import { App } from './_components/_layouts/App'
 import reportWebVitals from './reportWebVitals'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'moment/locale/es-mx'
 
 const rootElement = document.getElementById('root')
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
-import { CardGroup } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { exhibitionActions } from '../../../_actions'
 import { BillboardItem } from '../BillboardItem'
@@ -22,9 +22,9 @@ const BillboardList = ({ data = [], loading, error, list }) => {
     }
 
     return (
-        <CardGroup>
+        <Row>
             {data.map((item, i) => <BillboardItem key={i} {...item} />)}
-        </CardGroup>
+        </Row>
     )
 }
 
