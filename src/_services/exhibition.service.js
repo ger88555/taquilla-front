@@ -1,5 +1,5 @@
 import axios from 'axios'
-import moment from 'moment'
+import { toHumanReadable } from '../_helpers/timestamps'
 
 export const exhibitionService = {
     list,
@@ -7,8 +7,8 @@ export const exhibitionService = {
 
 const parseExhibition = ({ desde, hasta, ...rest }) => ({
     ...rest,
-    desde: moment(desde).format('DD/MMMM/YYYY').toUpperCase(),
-    hasta: moment(hasta).format('DD/MMMM/YYYY').toUpperCase()
+    desde: toHumanReadable(desde),
+    hasta: toHumanReadable(hasta)
 })
 
 function list(params = {}) {

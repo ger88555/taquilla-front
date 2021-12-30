@@ -2,6 +2,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { exhibitions } from './data'
 import { TestApp, generateResponse } from '../__config__'
+import { toHumanReadable } from '../../_helpers/timestamps'
 import { waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import axios from 'axios'
@@ -136,8 +137,8 @@ describe('When entering the App', () => {
             // assert
             for (const e of exhibitions) {
                 await waitFor(() => {
-                    expect( screen.getByText(RegExp(`.*${e.desde}.*`, 'i')) ).toBeInTheDocument()
-                    expect( screen.getByText(RegExp(`.*${e.hasta}.*`, 'i')) ).toBeInTheDocument()
+                    expect( screen.getByText(RegExp(`.*${toHumanReadable(e.desde)}.*`, 'i')) ).toBeInTheDocument()
+                    expect( screen.getByText(RegExp(`.*${toHumanReadable(e.hasta)}.*`, 'i')) ).toBeInTheDocument()
                 })
             }    
         })
