@@ -56,7 +56,7 @@ jobs:
         # API key with the deploy role
         api-key: ${{ secrets.HEROKU_API_KEY }}
         # Directory to upload
-        path: build
+        path: .
     
 #     - name: Rename 'build/' -> 'docs/'
 #       run: mv build docs
