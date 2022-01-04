@@ -27,11 +27,13 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm test
-
+  
+  
   build:
-
+  
+  
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v2
     - name: Install deps
@@ -45,6 +47,7 @@ jobs:
       run: npm run build
       env:
         REACT_APP_API_URL: ${{ secrets.API_URL }}
+        REACT_APP_HASH_ROUTES: TRUE
     
     - name: Rename 'build/' -> 'docs/'
       run: mv build docs
@@ -60,7 +63,6 @@ jobs:
         FOLDER: docs # The directory where your assets are generated
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
         MESSAGE: "Build: ({sha}) {msg}" # The commit message
-
 
   coverage:
 
