@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const userService = {
     login,
-//    logout,
+    logout,
 }
 
 function login(usuario, password) {
@@ -25,4 +25,7 @@ function login(usuario, password) {
             Promise.reject( err.data?.message || 'Hubo un error al realizar la solicitud.' )
         ))
     
+}
+function logout(){
+    localStorage.removeItem('user')
 }
