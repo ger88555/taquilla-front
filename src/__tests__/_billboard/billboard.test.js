@@ -20,11 +20,12 @@ describe('When entering the App', () => {
 
     it('main page is the Billboard', () => {
         // act
-        render(<TestApp />)
+        const { container } = render(<TestApp />)
 
         // assert
-        const title = screen.getByText(/Cartelera/i)
-        expect(title).toBeInTheDocument()
+        const title = container.querySelector('h1')
+        
+        expect(title.innerHTML).toEqual(expect.stringMatching(/Cartelera/i))
     })
 
     it('shows loading message while fetching Billboard exhibitions', () => {
