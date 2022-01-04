@@ -10,6 +10,7 @@ import { App } from './_components/_layouts/App'
 import reportWebVitals from './reportWebVitals'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'moment/locale/es-mx'
+import {RouterType} from './_components/_common/Router'
 
 const rootElement = document.getElementById('root')
 
@@ -18,7 +19,9 @@ axiosConfig.setUp()
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>
-            <App />
+            <RouterType>
+                <App />
+            </RouterType>
         </React.StrictMode>
     </Provider>,
     rootElement
