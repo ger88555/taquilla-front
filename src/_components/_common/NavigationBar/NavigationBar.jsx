@@ -14,6 +14,7 @@ import {
 } from 'react-redux'
 
 import {useNavigate} from 'react-router-dom'
+import { userActions } from '../../../_actions'
 
 function NavigationBar(){
     const dispatch = useDispatch()
@@ -22,7 +23,7 @@ function NavigationBar(){
     const label = loggedIn ? 'Cerrar Sesión': 'Iniciar Sesión'
     const sessionAction = 
         loggedIn ? 
-            () => dispatch({type:'LOGOUT'}):
+            () => dispatch(userActions.logout()):
             () => navigate('/login')
     console.log(sessionAction)
 
