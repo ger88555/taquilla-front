@@ -1,11 +1,16 @@
 import React from 'react'
 import './App.css'
-import { Router } from '../../_common/Router'
+import { Routes, Route } from 'react-router-dom'
+import routes from '../../../_constants/route.constants'
+import {Navigation} from './Navigation'
 
 export const App = () => {
     return (
         <div className="App">
-            <Router />
+            <Navigation />
+            <Routes>
+                {routes.map((props, i) => <Route key={i} {...props} />)}
+            </Routes>
         </div>
     )
 }
