@@ -1,17 +1,17 @@
 import { userConstants } from '../_constants'
 import { userService } from '../_services'
-import {history} from '../_helpers/history'
+// import {history} from '../_helpers/history'
 import { alertActions} from '.'
 import { setAuth } from '../_helpers/axios-config'
+// import { useNavigate } from 'react-router-dom'
 
 export const userActions = {
     login,
-    //logout,
+    logout,
 }
 
 
 function login(usuario, password){
-
     
     return dispatch => {
 
@@ -22,9 +22,7 @@ function login(usuario, password){
                 ({ user, token }) => {
                     localStorage.setItem('user', JSON.stringify(user))
                     dispatch(success(user))
-
                     setAuth(token)
-                    history.push('/')
                     
                 },
                 error => {
@@ -39,3 +37,8 @@ function login(usuario, password){
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }    
 
 }        
+
+function logout(){
+    userService.logout()
+    return { type: userConstants.LOGOUT }
+}
