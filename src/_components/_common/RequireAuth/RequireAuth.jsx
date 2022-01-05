@@ -16,7 +16,7 @@ function RequireAuth(props){
     console.log(loggedIn, role_id, id)
 
     if (!loggedIn){
-        return <Login/>
+        return <Login/>}
     return props.children
 }
 

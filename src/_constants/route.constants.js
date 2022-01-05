@@ -16,7 +16,7 @@ const routes = [
         path: '/admin',
         element: 
             <RequireAuth rol_id='2'>
-                <p>PLACEHOLDER</p>
+                <p>PLACEHOLDER ADMIN</p>
             </RequireAuth>
     },
 
