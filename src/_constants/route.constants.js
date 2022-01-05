@@ -1,6 +1,7 @@
 import React from 'react'
 import { Billboard } from '../_components/_views/Billboard'
 import { Login } from '../_components/_views/Login'
+import { RequireAuth} from '../_components/_common/RequireAuth/RequireAuth'
 
 const routes = [
     {
@@ -10,7 +11,23 @@ const routes = [
     {
         path: '/login',
         element: <Login />
+    },
+    {
+        path: '/admin',
+        element: 
+            <RequireAuth rol_id='2'>
+                <p>PLACEHOLDER</p>
+            </RequireAuth>
+    },
+
+    {
+        path: '/worker',
+        element: 
+            <RequireAuth rol_id='1'>
+                <p>PLACEHOLDER_WORKER</p>
+            </RequireAuth>
     }
+
 ]
 
 export default routes
