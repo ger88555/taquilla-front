@@ -19,7 +19,8 @@ import { userActions } from '../../../_actions'
 function NavigationBar(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const loggedIn = useSelector(state => state.authentication.loggedIn)
+    const {loggedIn, user} = useSelector(state => state.authentication)
+    const roleID = loggedIn ? user.rol_id : 0
     const label = loggedIn ? 'Cerrar Sesión': 'Iniciar Sesión'
     const sessionAction = 
         loggedIn ? 
@@ -30,10 +31,19 @@ function NavigationBar(){
     return(
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">Museo ITH</Navbar.Brand>
-                <Nav className="me-auto">
-                    <Nav.Link href="/">Cartelera</Nav.Link>
-                </Nav>
+                <Navbar.Brand href="/">Museo ITH</Navbar.Brand>
+
+                {roleID === 2 &&
+                    <Nav className="me-auto">
+                        <Nav.Link href="/admin">Cartelera</Nav.Link>
+                    </Nav>
+                } 
+                {roleID === 1 &&
+                    <Nav className="me-auto">
+                        <Nav.Link href="/worker">Exhibiciones</Nav.Link>
+                    </Nav>
+                } 
+
                 <Navbar.Collapse className="justify-content-end">
                     <Form onSubmit={sessionAction}>
                         <Button 
