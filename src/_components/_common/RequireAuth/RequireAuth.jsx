@@ -10,14 +10,13 @@ import {
 } from 'react-redux'
 
 function RequireAuth(props){
-    const loggedIn = useSelector(state => state.authentication.loggedIn)
-    const user_id = loggedIn ? useSelector(state => state.user.rol_id): false
+    const {loggedIn, user} = useSelector(state => state.authentication)
+    const role_id = user.rol_id
     const id = props.user_id
-    console.log(loggedIn, user_id)
+    console.log(loggedIn, role_id, id)
 
-    if (!loggedIn || user_id != id){
+    if (!loggedIn){
         return <Login/>
-    }
     return props.children
 }
 
