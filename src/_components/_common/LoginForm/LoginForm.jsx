@@ -10,6 +10,7 @@ import {
     /* useStore, */
     useDispatch,
 } from 'react-redux'
+import { Card, Col, Row } from 'react-bootstrap'
 
 /* class LoginForm extends React.Component { */
 /*     constructor(props){ */
@@ -127,33 +128,45 @@ function LoginForm(){
     }
 
     return(
-        <div className='Login'>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className='mb-3' controlId='email'>
-                    <Form.Label>Usuario</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        placeholder='Escriba su nombre de usuario aquí.'
-                        name='usuario'
-                        type='text'
-                        value={usuario}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='password'>
-                    <Form.Label>Contraseña</Form.Label>
-                    <Form.Control
-                        name='password' 
-                        placeholder='Contraseña'
-                        type='password'
-                        value={password}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-                <Button variant="primary" size='lg' type='submit'>
-                    Iniciar Sesión
-                </Button>
-            </Form>                       
+        <div className='Login' style={{marginTop:'10%'}}>
+            <Row className='flex-row justify-content-center'>
+                <Col md='3'>
+                    <Card className='p-4'>
+                        <Card.Body>
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Group className='mb-3' controlId='email' >
+                                    <Form.Label>Usuario</Form.Label>
+                                    <Form.Control
+                                        autoFocus
+                                        placeholder='Escriba su nombre de usuario aquí.'
+                                        name='usuario'
+                                        type='text'
+                                        value={usuario}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                                <Form.Group className='mb-3' controlId='password'>
+                                    <Form.Label>Contraseña</Form.Label>
+                                    <Form.Control
+                                        name='password' 
+                                        placeholder='Contraseña'
+                                        type='password'
+                                        value={password}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                                <Row>
+                                    <Col>
+                                        <Button variant="primary" type='submit' className='d-grip gap-2 col-6 mx-auto'>
+                                        Iniciar Sesión
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Form>   
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>           
         </div>
     )
 }

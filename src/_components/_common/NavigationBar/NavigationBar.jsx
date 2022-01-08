@@ -6,6 +6,8 @@ import {
     Container,
     Form,
     Button,
+    Col,
+    Image
 } from 'react-bootstrap'
         
 import { 
@@ -15,11 +17,13 @@ import {
 
 import {useNavigate} from 'react-router-dom'
 import { userActions } from '../../../_actions'
+import shopcart from '../../../_assets/shopcart.svg'
 
 function NavigationBar(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const loggedIn = useSelector(state => state.authentication.loggedIn)
+    const {loggedIn, user} = useSelector(state => state.authentication)
+    const roleID = loggedIn ? user.rol_id : 0
     const label = loggedIn ? 'Cerrar Sesión': 'Iniciar Sesión'
     const sessionAction = 
         loggedIn ? 
@@ -30,10 +34,19 @@ function NavigationBar(){
     return(
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">Museo ITH</Navbar.Brand>
-                <Nav className="me-auto">
-                    <Nav.Link href="/">Cartelera</Nav.Link>
-                </Nav>
+                <Navbar.Brand href="/">Museo ITH</Navbar.Brand>
+
+                {roleID === 2 &&
+                    <Nav className="me-auto">
+                        <Nav.Link href="/admin">Cartelera</Nav.Link>
+                    </Nav>
+                } 
+                {roleID === 1 &&
+                    <Nav className="me-auto">
+                        <Nav.Link href="/worker">Exhibiciones</Nav.Link>
+                    </Nav>
+                } 
+
                 <Navbar.Collapse className="justify-content-end">
                     <Nav className="me-2">
                         <Nav.Link href="/carrito">Carrito</Nav.Link>
@@ -46,6 +59,11 @@ function NavigationBar(){
                             {label}
                         </Button>
                     </Form>
+                    <Col xs sm={2} style={{ marginLeft:'-55px', marginRight:'-70px' }} >
+                        <a href='/'> 
+                            <Image src={shopcart} />
+                        </a>
+                    </Col>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
