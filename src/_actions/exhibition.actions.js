@@ -9,7 +9,6 @@ const addPromosToList = async (exhibitions) => {
     const promos = await promoService.list()
 
     for (const exh of exhibitions) {
-        console.log('comparing ', exh.id, 'to each of', promos)
         exh.promos = promos.filter(p => p.exhibicion_id == exh.id)
     }
     
