@@ -6,6 +6,8 @@ import {
     Container,
     Form,
     Button,
+    Col,
+    Image
 } from 'react-bootstrap'
         
 import { 
@@ -15,6 +17,7 @@ import {
 
 import {useNavigate} from 'react-router-dom'
 import { userActions } from '../../../_actions'
+import shopcart from '../../../_assets/shopcart.svg'
 
 function NavigationBar(){
     const dispatch = useDispatch()
@@ -53,6 +56,11 @@ function NavigationBar(){
                             {label}
                         </Button>
                     </Form>
+                    <Col xs sm={2} style={{ marginLeft:'-55px', marginRight:'-70px' }} >
+                        <a href='/'> 
+                            <Image src={shopcart} />
+                        </a>
+                    </Col>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
