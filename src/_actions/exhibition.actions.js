@@ -1,6 +1,5 @@
 import { exhibitionConstants } from '../_constants'
 import { exhibitionService } from '../_services'
-import {history} from '../_helpers/history'
 
 export const exhibitionActions = {
     list,
@@ -17,9 +16,7 @@ function list(params = {}){
         exhibitionService.list(params)
             .then(
                 data => {
-                    dispatch(success(data))
-                    history.push('/')
-                    
+                    dispatch(success(data))                    
                 },
                 error => {
                     dispatch(failure(error))
