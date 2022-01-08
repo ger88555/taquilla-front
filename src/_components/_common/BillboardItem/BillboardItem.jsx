@@ -1,9 +1,12 @@
 import React from 'react'
 import { Card, Col } from 'react-bootstrap'
 import { PromoList } from './PromoList'
-import { CartButton } from './CartButton'
+import { CartButton } from '../CartButton'
 
-export const BillboardItem = ({ id, nombre, descripcion, desde, hasta, precio, promos = [] }) => {
+export const BillboardItem = (props) => {
+
+    const { id, nombre, descripcion, desde, hasta, precio, promos = [] } = props
+
     return (
         <Col sm="12" md="auto" className="mb-4">
             <Card bg="light">
@@ -28,11 +31,11 @@ export const BillboardItem = ({ id, nombre, descripcion, desde, hasta, precio, p
 
                 <Card.Footer className='text-end'>
 
-                    <CartButton id={id} label={`$ ${precio}`} />
+                    <CartButton id={id} label={`$ ${precio}`} exhibition={props} />
 
                 </Card.Footer>
                 
-                <PromoList data={promos} />
+                <PromoList exhibition={props} data={promos} />
             </Card>
         </Col>
     )

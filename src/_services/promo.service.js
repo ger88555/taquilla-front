@@ -5,9 +5,9 @@ export const promoService = {
     list,
 }
 
-const parsePromo = ({ vigencia, dias_semana, ...rest }) => ({
+const parsePromo = ({ vigencia, ...rest }) => ({
     ...rest,
-    dias_semana,
+    discount_text: `${rest.cantidad} x ${rest.porcentaje * 100}%`,
     vigencia: toHumanReadable(vigencia),
 })
 

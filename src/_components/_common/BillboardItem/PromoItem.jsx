@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Badge, Card, Col, Container, Row } from 'react-bootstrap'
 import { customerConstants } from '../../../_constants'
 import { hasCurrentDayOfWeek, toHumanReadable } from '../../../_helpers/weekdays'
-import { CartButton } from './CartButton'
+import { CartButton } from '../CartButton'
 
-export const PromoItem = ({ id, exhibicion_id, porcentaje, cantidad, vigencia, dias_semana, tipo_de_cliente_id }) => {
-    const [discountMessage, setDiscountMessage] = useState('')
+export const PromoItem = ({ exhibition, ...promo }) => {
+
+    const { vigencia, dias_semana, tipo_de_cliente_id, discount_text } = promo
+
     const [weekdaysMessage, setWeekdaysMessage] = useState('')
     const [forToday, setForToday] = useState(false)
 
@@ -22,8 +24,6 @@ export const PromoItem = ({ id, exhibicion_id, porcentaje, cantidad, vigencia, d
             setForToday(true)
         }
     }, [dias_semana])
-
-    useEffect(() => setDiscountMessage(`${cantidad} x ${porcentaje * 100}%`), [cantidad, porcentaje])
 
 
     return (
@@ -58,13 +58,13 @@ export const PromoItem = ({ id, exhibicion_id, porcentaje, cantidad, vigencia, d
                     <Col sm="12" xl="4" className="offset-none offset-xl-4">
                         <Card.Text>
                             <span className="h4">
-                                {discountMessage}
+                                {discount_text}
                             </span>
                         </Card.Text>
                     </Col>
 
                     <Col sm="12" xl="4">
-                        {forToday && <CartButton id={exhibicion_id} promocion_id={id} variant='dark' label="%" />}
+                        {forToday && <CartButton exhibition={exhibition} promo={promo} variant='dark' label="%" />}
                     </Col>
 
                 </Row>

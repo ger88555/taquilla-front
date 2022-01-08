@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import { PromoItem } from './PromoItem'
 
-export const PromoList = ({ data = [] }) => {
+export const PromoList = ({ exhibition, data = [] }) => {
 
     if (!data.length) return null
 
@@ -12,7 +12,7 @@ export const PromoList = ({ data = [] }) => {
                 <strong>Promociones:</strong>
             </Card.Footer>
 
-            {data.map((p, i) => <PromoItem key={i} {...p} />)}
+            {data.map((p, i) => <PromoItem key={i} {...p} exhibition={exhibition} />)}
         </>
     )
 }

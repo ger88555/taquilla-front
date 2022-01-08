@@ -6,7 +6,6 @@ import { CartItems } from '../../_common/CartItems'
 
 const Cart = ({ get }) => {
     const [id] = useState(localStorage.getItem('cart_id') || null)
-    console.log(id)
 
     const reload = useCallback(() => get(id), [])
 
