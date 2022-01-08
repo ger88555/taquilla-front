@@ -48,9 +48,6 @@ function NavigationBar(){
                 } 
 
                 <Navbar.Collapse className="justify-content-end">
-                    <Nav className="me-2">
-                        <Nav.Link href="/carrito">Carrito</Nav.Link>
-                    </Nav>
                     <Form onSubmit={sessionAction}>
                         <Button 
                             variant="primary" 
@@ -60,7 +57,7 @@ function NavigationBar(){
                         </Button>
                     </Form>
                     <Col xs sm={2} style={{ marginLeft:'-55px', marginRight:'-70px' }} >
-                        <a href='/'> 
+                        <a href='/carrito'> 
                             <Image src={shopcart} />
                         </a>
                     </Col>
