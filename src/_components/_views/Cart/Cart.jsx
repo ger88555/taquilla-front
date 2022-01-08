@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import { connect } from 'react-redux'
+import React, { useCallback, useEffect, useState} from 'react'
+import { Container, Row, Col, Button} from 'react-bootstrap'
+import { connect} from 'react-redux'
 import { cartActions } from '../../../_actions'
 import { CartItems } from '../../_common/CartItems'
 
@@ -27,7 +27,8 @@ const Cart = ({ get }) => {
                 <Col className='text-center'>
                     <CartItems />
                 </Col>
-            </Row>
+            </Row>           
+            <Button onClick={()=> window.location.href='/pago'}>Ir a pagar</Button>
 
         </Container>
     )
