@@ -1,8 +1,19 @@
 import { exhibitionConstants } from '../_constants'
-import { exhibitionService } from '../_services'
+import { exhibitionService, promoService } from '../_services'
 
 export const exhibitionActions = {
     list,
+}
+
+const addPromosToList = async (exhibitions) => {
+    const promos = await promoService.list()
+
+    for (const exh of exhibitions) {
+        console.log('comparing ', exh.id, 'to each of', promos)
+        exh.promos = promos.filter(p => p.exhibicion_id == exh.id)
+    }
+    
+    return exhibitions
 }
 
 
@@ -14,6 +25,7 @@ function list(params = {}){
         dispatch(request())
 
         exhibitionService.list(params)
+            .then(addPromosToList)
             .then(
                 data => {
                     dispatch(success(data))                    

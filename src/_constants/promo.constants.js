@@ -1,0 +1,5 @@
+export const promoConstants = {
+    PROMOS_REQUEST: 'PROMOS_REQUEST',
+    PROMOS_SUCCESS: 'PROMOS_SUCCESS',
+    PROMOS_FAILURE: 'PROMOS_FAILURE',
+}

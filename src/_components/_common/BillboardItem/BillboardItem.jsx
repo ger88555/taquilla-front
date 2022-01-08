@@ -1,14 +1,11 @@
 import React from 'react'
-import { Card, Button, Col } from 'react-bootstrap'
+import { Card, Col } from 'react-bootstrap'
+import { PromoList } from './PromoList'
+import { CartButton } from './CartButton'
 
-export const BillboardItem = ({ id, nombre, descripcion, desde, hasta, precio }) => {
-
-    const addToCart = () => {
-        //
-    }
-
+export const BillboardItem = ({ id, nombre, descripcion, desde, hasta, precio, promos = [] }) => {
     return (
-        <Col>
+        <Col sm="12" md="auto" className="mb-4">
             <Card bg="light">
                 <Card.Body>
 
@@ -28,13 +25,14 @@ export const BillboardItem = ({ id, nombre, descripcion, desde, hasta, precio })
                     </small>
 
                 </Card.Footer>
+
                 <Card.Footer className='text-end'>
 
-                    <Button data-testid={`${id}-add-to-cart`} className="btn-block" variant='success' onClick={addToCart}>
-                        Añadir al carrito
-                    </Button>
+                    <CartButton id={id} label={`$ ${precio}`} />
 
                 </Card.Footer>
+                
+                <PromoList data={promos} />
             </Card>
         </Col>
     )
