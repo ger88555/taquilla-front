@@ -35,6 +35,9 @@ function NavigationBar(){
                     <Nav.Link href="/">Cartelera</Nav.Link>
                 </Nav>
                 <Navbar.Collapse className="justify-content-end">
+                    <Nav className="me-2">
+                        <Nav.Link href="/carrito">Carrito</Nav.Link>
+                    </Nav>
                     <Form onSubmit={sessionAction}>
                         <Button 
                             variant="primary" 
