@@ -9,6 +9,7 @@ import {
 } from 'react-bootstrap'
 
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import shopcart from '../../../_assets/shopcart.svg'
 import { AuthButton } from '../AuthButton'
@@ -16,20 +17,21 @@ import { AuthButton } from '../AuthButton'
 function NavigationBar() {
     const { loggedIn, user } = useSelector(state => state.authentication)
     const getRoleId = useCallback(() => loggedIn ? user.rol_id : 0, [loggedIn])
+    const navigate = useNavigate()
 
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="/">Museo ITH</Navbar.Brand>
+                <Navbar.Brand onClick={() => navigate('/')}>Museo ITH</Navbar.Brand>
 
                 {getRoleId() === 2 &&
                     <Nav className="me-auto">
-                        <Nav.Link href="/admin">Cartelera</Nav.Link>
+                        <Nav.Link onClick={() => navigate('/admin')}>Cartelera</Nav.Link>
                     </Nav>
                 }
                 {getRoleId() === 1 &&
                     <Nav className="me-auto">
-                        <Nav.Link href="/worker">Exhibiciones</Nav.Link>
+                        <Nav.Link onClick={() => navigate('/worker')}>Exhibiciones</Nav.Link>
                     </Nav>
                 }
 
@@ -38,7 +40,7 @@ function NavigationBar() {
                     <AuthButton />
 
                     <Col xs sm={2} style={{ marginLeft: '-55px', marginRight: '-70px' }} >
-                        <a href='/carrito'>
+                        <a onClick={() => navigate('/carrito')}>
                             <Image src={shopcart} />
                         </a>
                     </Col>
