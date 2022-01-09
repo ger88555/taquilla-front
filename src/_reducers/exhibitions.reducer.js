@@ -26,6 +26,18 @@ export function exhibitions(state = initialState, action){
             error: action.payload
         }
 
+    case exhibitionConstants.EXHIBITIONS_EDIT_SUCCESS:
+        return {
+            ...initialState,
+            data: action.payload,
+        }
+
+    case exhibitionConstants.EXHIBITIONS_EDIT_FAILURE:
+        return {
+            ...initialState,
+            error: action.payload
+        }
+
     default:
         return state
 
