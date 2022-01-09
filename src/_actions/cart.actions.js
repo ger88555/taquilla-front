@@ -1,9 +1,9 @@
 import { cartConstants } from '../_constants'
-import { cartService } from '../_services'
+import { cartService, itemService } from '../_services'
 
 export const cartActions = {
     get,
-    add
+    add,
 }
 
 
@@ -19,7 +19,7 @@ function add(exhibition_id, promo_id = null){
 
         dispatch(request())
 
-        cartService.add(data)
+        itemService.add(data)
             .then(
                 data => {
                     // Save the cart id for future page loads.

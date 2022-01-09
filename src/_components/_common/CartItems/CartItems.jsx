@@ -1,11 +1,17 @@
 import React, { useEffect } from 'react'
-import { Row } from 'react-bootstrap'
+import { useCallback } from 'react'
 import { connect } from 'react-redux'
-import { cartActions, exhibitionActions } from '../../../_actions'
+import { itemActions, exhibitionActions } from '../../../_actions'
 import { CartItem } from '../CartItem'
 import { Error, Loading } from '../Messages'
 
-const CartItems = ({ data = [], loading, error, listExhibitions }) => {
+const CartItems = ({ cart_id, data = [], loading, error, list, listExhibitions }) => {
+    const reload = useCallback(() => list(cart_id), [cart_id])
+
+    useEffect(() => {
+        reload()
+    }, [cart_id])
+
     useEffect(() => {
         listExhibitions({ available: true })
     }, [])
@@ -18,13 +24,9 @@ const CartItems = ({ data = [], loading, error, listExhibitions }) => {
         return <Loading />
     }
 
-    return (
-        <Row>
-            {data.map((item, i) => <CartItem key={i} {...item} />)}
-        </Row>
-    )
+    return data.map((item, i) => <CartItem key={i} {...item} />)
 }
 
-const connectedCartItems = connect( (state) => ({ data: state.cart.data.items }), { ...cartActions, listExhibitions: exhibitionActions.list } )(CartItems)
+const connectedCartItems = connect( (state) => ({ cart_id: state.cart.data.id, data: state.items.data }), { ...itemActions, listExhibitions: exhibitionActions.list } )(CartItems)
 
 export {connectedCartItems as CartItems}

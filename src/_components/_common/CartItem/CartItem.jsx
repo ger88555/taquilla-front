@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Alert, Card, Col } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Alert, Card, Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { customerConstants } from '../../../_constants'
+import { TicketsRange } from '../TicketstRange'
 
-const CartItem = ({ exhibicion_id, promocion_id, cantidad_boletos, exhibitions }) => {
+const CartItem = ({ id, exhibicion_id, promocion_id, cantidad_boletos, exhibitions }) => {
     const [exhibition, setExhibition] = useState(null)
     const [promo, setPromo] = useState(null)
 
@@ -19,49 +20,40 @@ const CartItem = ({ exhibicion_id, promocion_id, cantidad_boletos, exhibitions }
         }
     }, [exhibition, promocion_id])
 
-    const getPriceTotal = useCallback(
-        () => cantidad_boletos * exhibition.precio * (promo?.porcentaje || 1),
-        [cantidad_boletos, exhibition?.precio, promo?.porcentaje]
-    )
-
     return (
-        <Col>
-            <Card bg="light">
-                {exhibition?.id && (
-                    <>
-                        <Card.Body>
+        <Row className='mb-1'>
+            <Col>
+                <Card bg="light">
+                    {exhibition?.id && (
+                        <>
+                            <Card.Body>
 
-                            <Card.Title><span className='display-6'>{exhibition.nombre}</span></Card.Title>
+                                <Card.Title><span className='display-6'>{exhibition.nombre}</span></Card.Title>
 
-                            <Card.Text>{exhibition.descripcion}</Card.Text>
+                                <Card.Text>{exhibition.descripcion}</Card.Text>
 
-                            <Card.Text className="text-end">
+                                <Card.Text className="text-end">
 
-                                <small className="text-muted">
-                                    Del <strong>{exhibition.desde}</strong> hasta el <strong>{exhibition.hasta}</strong>
-                                </small>
+                                    <small className="text-muted">
+                                        Del <strong>{exhibition.desde}</strong> hasta el <strong>{exhibition.hasta}</strong>
+                                    </small>
 
-                            </Card.Text>
+                                </Card.Text>
 
-                            {promo?.id && (
-                                <Alert className='text-center mb-0' variant='warning'>
-                                    <strong>Promoción: {customerConstants[promo.tipo_de_cliente_id]} {promo.discount_text}</strong>
-                                </Alert>
-                            )}
+                                {promo?.id && (
+                                    <Alert className='text-center mb-0' variant='warning'>
+                                        <strong>Promoción: {customerConstants[promo.tipo_de_cliente_id]} {promo.discount_text}</strong>
+                                    </Alert>
+                                )}
 
-                        </Card.Body>
+                            </Card.Body>
 
-                        <Card.Footer className='text-end'>
-
-                            <Card.Text>
-                                <strong>$ {getPriceTotal()} MXN</strong> x <strong>{cantidad_boletos} boletos</strong>
-                            </Card.Text>
-
-                        </Card.Footer>
-                    </>
-                )}
-            </Card>
-        </Col>
+                            <TicketsRange id={id} defaultValue={cantidad_boletos} exhibition={exhibition} promo={promo} />
+                        </>
+                    )}
+                </Card>
+            </Col>
+        </Row>
     )
 }
 
