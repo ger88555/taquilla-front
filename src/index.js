@@ -4,6 +4,7 @@ import './index.css'
 
 import {Provider} from 'react-redux'
 import store from './store'
+import { userActions } from './_actions'
 import * as axiosConfig from './_helpers/axios-config'
 
 import { App } from './_components/_layouts/App'
@@ -15,6 +16,7 @@ import {RouterType} from './_components/_common/Router'
 const rootElement = document.getElementById('root')
 
 axiosConfig.setUp()
+store.dispatch(userActions.restore())
 
 ReactDOM.render(
     <Provider store={store}>

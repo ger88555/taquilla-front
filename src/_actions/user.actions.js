@@ -1,13 +1,23 @@
 import { userConstants } from '../_constants'
 import { userService } from '../_services'
-// import {history} from '../_helpers/history'
-import { alertActions} from '.'
 import { setAuth } from '../_helpers/axios-config'
-// import { useNavigate } from 'react-router-dom'
 
 export const userActions = {
+    restore,
     login,
     logout,
+}
+
+function restore(){
+    return dispatch => {
+        const user = JSON.parse(localStorage.getItem('user'))
+
+        if (user && user.token) {
+            dispatch(success(user))
+            setAuth(user.token)
+        }
+
+    }
 }
 
 
@@ -27,18 +37,21 @@ function login(usuario, password){
                 },
                 error => {
                     dispatch(failure(error))
-                    dispatch(alertActions.error(error))
                 }
             )
-    }
+    }  
 
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }    
-
-}        
+}
 
 function logout(){
     userService.logout()
+
+    localStorage.removeItem('user')
+    setAuth(null)
+
     return { type: userConstants.LOGOUT }
 }
+
+function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
+function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
+function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }

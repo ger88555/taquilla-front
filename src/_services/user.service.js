@@ -12,6 +12,22 @@ function login(usuario, password) {
     }
 
     return axios.post('/users/login', credentials)
+        .then(response => {
+            const { data } = response
+
+            if (!data.success) {
+                return Promise.reject({ response })
+            }
+
+            return data
+        })
+        .catch(err => (
+            Promise.reject( err.response?.data?.message || 'Hubo un error al realizar la solicitud.' )
+        ))
+    
+}
+function logout(){
+    return axios.delete('/users/logout')
         .then(res => {
             const { data } = res
 
@@ -21,11 +37,7 @@ function login(usuario, password) {
 
             return data
         })
-        .catch(err => (            
-            Promise.reject( err.data?.message || 'Hubo un error al realizar la solicitud.' )
+        .catch(() => (
+            console.debug('Could not revoke API token.')
         ))
-    
-}
-function logout(){
-    localStorage.removeItem('user')
 }
