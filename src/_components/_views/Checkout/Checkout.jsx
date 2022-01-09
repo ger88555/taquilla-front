@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { cartActions } from '../../../_actions'
 import { BottomNavigation } from '../../_common/BottomNavigation'
-import { CartItems } from '../../_common/CartItems'
 
-const Cart = ({ get }) => {
+const Checkout = ({ get }) => {
     const [id] = useState(localStorage.getItem('cart_id') || null)
 
     const reload = useCallback(() => get(id), [])
@@ -19,22 +18,22 @@ const Cart = ({ get }) => {
 
             <Row>
                 <Col className='text-start'>
-                    <h1 className="display-1">Mi Carrito</h1>
+                    <h1 className="display-1">Pago de Boletos</h1>
                 </Col>
             </Row>
 
             <Row>
                 <Col className='text-center'>
-                    <CartItems />
+                    (Sin Implementar)
                 </Col>
             </Row>
 
-            <BottomNavigation next={{ label: 'Ir a pagar', to: '/pago' }} />
+            <BottomNavigation prev={{ label: 'Regresar', to: '/carrito' }} next={{ label: 'Pagar', onClick: () => {} }} />
 
         </Container>
     )
 }
 
-const connectedCart = connect( (state) => (state.cart.data), { ...cartActions } )(Cart)
+const connectedCheckout = connect((state) => (state.cart.data), { ...cartActions })(Checkout)
 
-export {connectedCart as Cart}
+export { connectedCheckout as Checkout }
