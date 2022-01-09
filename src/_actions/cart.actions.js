@@ -34,9 +34,9 @@ function add(exhibition_id, promo_id = null){
             )
     }
 
-    function request() { return { type: cartConstants.CART_REQUEST } }
-    function success(data) { return { type: cartConstants.CART_SUCCESS, payload: data } }
-    function failure(error) { return { type: cartConstants.CART_FAILURE, payload: error } }    
+    function request() { return { type: cartConstants.CART_ITEM_REQUEST } }
+    function success() { return { type: cartConstants.CART_ITEM_SUCCESS } }
+    function failure(error) { return { type: cartConstants.CART_ITEM_FAILURE, payload: error } }    
 
 }
 

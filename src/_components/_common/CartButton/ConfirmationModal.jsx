@@ -16,9 +16,11 @@ const ConfirmationModal = ({ exhibition = {}, promo = {}, show = false, onHide =
     )
 
     const submitHandler = useCallback(() => {
-        add(exhibition.id, promo?.id)
-
-        navigate('/carrito')
+        (async () => {
+            await add(exhibition.id, promo?.id)
+    
+            navigate('/carrito')
+        })()
     })
 
     return (

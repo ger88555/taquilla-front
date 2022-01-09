@@ -37,6 +37,12 @@ export function cart(state = initialState, action){
             error: action.payload
         }
 
+    case cartConstants.CART_ITEM_FAILURE:
+        return {
+            ...state,
+            error: action.payload
+        }
+
     default:
         return state
 
