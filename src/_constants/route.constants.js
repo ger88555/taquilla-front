@@ -4,6 +4,7 @@ import { Login } from '../_components/_views/Login'
 import { Cart } from '../_components/_views/Cart'
 import { Checkout } from '../_components/_views/Checkout'
 import { RequireAuth} from '../_components/_common/RequireAuth/RequireAuth'
+import { Printout } from '../_components/_views/Printout'
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
     {
         path: '/pago',
         element: <Checkout />
+    },
+
+    {
+        path: '/impresion',
+        element: <Printout />
     },
 
     {
