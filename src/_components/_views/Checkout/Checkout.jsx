@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { cartActions } from '../../../_actions'
 import { BottomNavigation } from '../../_common/BottomNavigation'
@@ -8,6 +8,15 @@ const Checkout = ({ get }) => {
     const [id] = useState(localStorage.getItem('cart_id') || null)
 
     const reload = useCallback(() => get(id), [])
+
+    const [validated, setValidated] = useState(false)
+    const handleSubmit = (event) => {
+        if (Form.checkValidity() === false){
+            event.preventDefualt()
+            event.stopPropagation
+        }
+        setValidated(true)
+    }
 
     useEffect(() => {
         reload()
@@ -22,13 +31,44 @@ const Checkout = ({ get }) => {
                 </Col>
             </Row>
 
-            <Row>
-                <Col className='text-center'>
-                    (Sin Implementar)
+            <Row className="justify-content-md-center">
+                <Col className='text-center' sm = {3}>
+                    <Form noValidate validated={validated}>
+                        <FormGroup controlId="validationCustom01">
+                            <FormLabel>Introduzca su nombre</FormLabel>
+                            <FormControl type="text" placeholder="introduzca nombre" required>
+                            </FormControl>
+                        </FormGroup>
+                        <FormControl.Feedback type = "invalid"> introduzca nombre</FormControl.Feedback>
+                    </Form>
+                </Col>   
+            </Row>
+            <Row className="justify-content-md-center">
+                <Col className='text-center' sm = {3}>
+                    <Form noValidate validated={validated}>
+                        <FormGroup controlId="validationCustom02">
+                            <FormLabel>Introduzca su numero de Tarjeta</FormLabel>
+                            <FormControl type="number" placeholder="introduzca numero de tarjeta" required >
+                            </FormControl>
+                        </FormGroup>
+                        <FormControl.Feedback type = "invalid"> introduzca tarjeta</FormControl.Feedback>
+                    </Form>
+                </Col>
+            </Row>
+            <Row className="justify-content-md-center">
+                <Col className='text-center' sm = {3}>
+                    <Form noValidate validated={validated}>
+                        <FormGroup controlId="validationCustom03">
+                            <FormLabel>Introduzca su correo</FormLabel>
+                            <FormControl type="text" placeholder="introduzca su correo" required >
+                            </FormControl>
+                        </FormGroup>
+                        <FormControl.Feedback type = "invalid"> introduzca correo</FormControl.Feedback>
+                    </Form>
                 </Col>
             </Row>
 
-            <BottomNavigation prev={{ label: 'Regresar', to: '/carrito' }} next={{ label: 'Pagar', onClick: () => {} }} />
+            <BottomNavigation prev={{ label: 'Regresar', to: '/carrito' }} next={{ label: 'Pagar', onClick: () => {handleSubmit} }} />
 
         </Container>
     )
