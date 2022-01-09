@@ -3,6 +3,7 @@ import { toHumanReadable } from '../_helpers/timestamps'
 
 export const exhibitionService = {
     list,
+    editPrice,
 }
 
 const parseExhibition = ({ desde, hasta, ...rest }) => ({
@@ -27,4 +28,21 @@ function list(params = {}) {
         .catch(err => (
             Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud.')
         ))
+}
+
+function editPrice(id, price){
+    return axios
+        .put(`/exhibitions/${id}`, {price})
+        .then(res => {
+            const { data } = res
+
+            if (data.success === false) {
+                return Promise.reject(res)
+            }
+
+            return data.data
+        })
+        .catch(err => (
+            Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud.')
+        )) 
 }
