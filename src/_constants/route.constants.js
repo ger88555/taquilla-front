@@ -5,6 +5,7 @@ import { Cart } from '../_components/_views/Cart'
 import { Checkout } from '../_components/_views/Checkout'
 import { RequireAuth} from '../_components/_common/RequireAuth/RequireAuth'
 import { Printout } from '../_components/_views/Printout'
+import { ExhibitionsTable } from '../_components/_layouts/App/ExhibitionsTable'
 
 const routes = [
     {
@@ -36,7 +37,7 @@ const routes = [
         path: '/admin',
         element: 
             <RequireAuth rol_id='2'>
-                <p>PLACEHOLDER ADMIN</p>
+                <ExhibitionsTable/>
             </RequireAuth>
     },
 
