@@ -1,134 +1,44 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 
-import {useNavigate} from 'react-router-dom'
-/* import { connect } from 'react-redux' */
+import { useNavigate } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { userActions } from '../../../_actions'
-import {
-    /* useStore, */
-    useDispatch,
-} from 'react-redux'
-import { Card, Col, Row } from 'react-bootstrap'
+import { Alert, Card, Col, Row } from 'react-bootstrap'
 
-/* class LoginForm extends React.Component { */
-/*     constructor(props){ */
-/*         super(props) */
-/*         this.state = { */
-/*             usuario: '', */
-/*             password: '', */
-/*             submited: false, */
-/*         } */
-/*         this.handleSubmit = this.handleSubmit.bind(this) */
-/*         this.handleChange = this.handleChange.bind(this) */
-/*     } */
 
-/*     handleChange(event){ */
-/*         event.preventDefault() */
-/*         const target = event.target */
-/*         this.setState({ */
-/*             [target.name]: target.value, */ 
-/*         }) */
-/*     } */
+const LoginForm = ({ error, loggedIn, login }) => {
+    const navigate = useNavigate()
 
-/*     handleSubmit(event){ */
-/*         event.preventDefault() */
-        
-/*         this.setState({value: event.target.value}) */
-/*         this.setState({submited: true}) */
-/*         const {usuario, password} =  this.state */ 
-/*         this.props.login(usuario, password) */
-/*     } */ 
+    /**
+     * Redirect authenticated users
+     */
+    useEffect(() => { loggedIn && navigate('/') }, [loggedIn])
 
-/*     //TODO: Validate form */
-/*     validateForm() { */
-/*         return 0 */
-/*     } */
-
-/*     render() { */
-/*         return( */
-/*             <div className='Login'> */
-/*                 <Form onSubmit={this.handleSubmit}> */
-/*                     <Form.Group className='mb-3' controlId='email'> */
-/*                         <Form.Label>Usuario</Form.Label> */
-/*                         <Form.Control */
-/*                             autoFocus */
-/*                             placeholder='Escriba su nombre de usuario aquí.' */
-/*                             name='usuario' */
-/*                             type='text' */
-/*                             value={this.state.usuario} */
-/*                             onChange={this.handleChange} */
-/*                         /> */
-/*                     </Form.Group> */
-/*                     <Form.Group className='mb-3' controlId='password'> */
-/*                         <Form.Label>Contraseña</Form.Label> */
-/*                         <Form.Control */
-/*                             name='password' */ 
-/*                             placeholder='Contraseña' */
-/*                             type='password' */
-/*                             value={this.state.password} */
-/*                             onChange={this.handleChange} */
-/*                         /> */
-/*                     </Form.Group> */
-/*                     <Button variant="primary" size='lg' type='submit'> */
-/*                         Iniciar Sesión */
-/*                     </Button> */
-/*                 </Form> */                       
-/*             </div> */
-/*         ) */
-            
-/*     } */
-/* } */
-
-/* function mapStateToProps(state){ */
-/*     const { loggingIn } = state.authentication */
-/*     return { loggingIn } */
-/* } */
-
-/* const actionCreators = { */
-/*     login: userActions.login, */
-/*     logout: userActions.logout */
-/* } */
-
-/* const connectedLoginForm = connect(mapStateToProps, actionCreators)(LoginForm) */
-
-/* export {connectedLoginForm as LoginForm} */
-
-function LoginForm(){
     const [credentials, setCredentials] = useState({
-        usuario: '', 
+        usuario: '',
         password: ''
     })
 
-    /* let location = useLocation(); */
-    
-    const navigate = useNavigate()
-    /* const [submitted, setSubmitted] = useState(false) */
-
-    /* const loggingIn = useSelector(state => state) */
-
-    const dispatch = useDispatch()
     const { usuario, password } = credentials
 
-    function handleChange(e){
-        const {name, value} = e.target
-        setCredentials(credentials => ({...credentials, [name]: value}))
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setCredentials(credentials => ({ ...credentials, [name]: value }))
     }
 
-    function handleSubmit(e){
+    const handleSubmit = useCallback((e) => {
         e.preventDefault()
-        /* setSubmitted(true) */
 
-        if (usuario && password){
-            dispatch(userActions.login(usuario, password))
+        if (usuario && password) {
+            login(usuario, password)
         }
+    }, [usuario, password])
 
-        navigate('/')
-    }
-
-    return(
-        <div className='Login' style={{marginTop:'10%'}}>
+    return (
+        <div className='Login' style={{ marginTop: '10%' }}>
             <Row className='flex-row justify-content-center'>
                 <Col md='3'>
                     <Card className='p-4'>
@@ -148,27 +58,36 @@ function LoginForm(){
                                 <Form.Group className='mb-3' controlId='password'>
                                     <Form.Label>Contraseña</Form.Label>
                                     <Form.Control
-                                        name='password' 
+                                        name='password'
                                         placeholder='Contraseña'
                                         type='password'
                                         value={password}
                                         onChange={handleChange}
                                     />
                                 </Form.Group>
+                                {error && (
+                                    <Row>
+                                        <Col>
+                                            <Alert variant='danger'>{error}</Alert>
+                                        </Col>
+                                    </Row>
+                                )}
                                 <Row>
                                     <Col>
                                         <Button variant="primary" type='submit' className='d-grip gap-2 col-6 mx-auto'>
-                                        Iniciar Sesión
+                                            Iniciar Sesión
                                         </Button>
                                     </Col>
                                 </Row>
-                            </Form>   
+                            </Form>
                         </Card.Body>
                     </Card>
                 </Col>
-            </Row>           
+            </Row>
         </div>
     )
 }
 
-export {LoginForm}
+const connectedLoginForm = connect(state => state.authentication, { ...userActions })(LoginForm)
+
+export { connectedLoginForm as LoginForm }
