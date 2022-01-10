@@ -26,7 +26,7 @@ function NavigationBar() {
 
                 {getRoleId() === 2 &&
                     <Nav className="me-auto">
-                        <Nav.Link onClick={() => navigate('/admin')}>Cartelera</Nav.Link>
+                        <Nav.Link onClick={() => navigate('/admin')}>Administración de Exhibiciones</Nav.Link>
                     </Nav>
                 }
                 {getRoleId() === 1 &&
