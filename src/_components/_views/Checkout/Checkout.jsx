@@ -4,18 +4,20 @@ import { connect } from 'react-redux'
 import { cartActions } from '../../../_actions'
 import { BottomNavigation } from '../../_common/BottomNavigation'
 
-const Checkout = ({ get }) => {
+const Checkout = ({ get, pay }) => {
     const [id] = useState(localStorage.getItem('cart_id') || null)
-
     const reload = useCallback(() => get(id), [])
+
+    const [nombre_cliente, setNombre] = useState('')
+    const [correo, setCorreo] = useState('')
+    const [no_tarjeta, setTarjeta] = useState('')
 
     const [validated, setValidated] = useState(false)
     const handleSubmit = (event) => {
-        if (Form.checkValidity() === false){
-            event.preventDefualt()
-            event.stopPropagation
-        }
+        console.log(event)
         setValidated(true)
+        
+        pay(id, {no_tarjeta, nombre_cliente, correo}) 
     }
 
     useEffect(() => {
@@ -36,10 +38,10 @@ const Checkout = ({ get }) => {
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom01">
                             <FormLabel>Introduzca su nombre</FormLabel>
-                            <FormControl type="text" placeholder="introduzca nombre" required>
+                            <FormControl type="text" onChange={e => setNombre(e.target.value)} placeholder="introduzca nombre" required>
                             </FormControl>
                         </FormGroup>
-                        <FormControl.Feedback type = "invalid"> introduzca nombre</FormControl.Feedback>
+                        <FormControl.Feedback type = "invalid"> Introduzca Nombre</FormControl.Feedback>
                     </Form>
                 </Col>   
             </Row>
@@ -48,10 +50,10 @@ const Checkout = ({ get }) => {
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom02">
                             <FormLabel>Introduzca su numero de Tarjeta</FormLabel>
-                            <FormControl type="number" placeholder="introduzca numero de tarjeta" required >
+                            <FormControl type="number" onChange={e => setTarjeta(e.target.value)} placeholder="introduzca numero de tarjeta" required >
                             </FormControl>
                         </FormGroup>
-                        <FormControl.Feedback type = "invalid"> introduzca tarjeta</FormControl.Feedback>
+                        <FormControl.Feedback type = "invalid"> Introduzca Tarjeta</FormControl.Feedback>
                     </Form>
                 </Col>
             </Row>
@@ -60,7 +62,7 @@ const Checkout = ({ get }) => {
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom03">
                             <FormLabel>Introduzca su correo</FormLabel>
-                            <FormControl type="text" placeholder="introduzca su correo" required >
+                            <FormControl type="text"  onChange={e => setCorreo(e.target.value)} placeholder="introduzca su correo" required >
                             </FormControl>
                         </FormGroup>
                         <FormControl.Feedback type = "invalid"> introduzca correo</FormControl.Feedback>
@@ -68,7 +70,7 @@ const Checkout = ({ get }) => {
                 </Col>
             </Row>
 
-            <BottomNavigation prev={{ label: 'Regresar', to: '/carrito' }} next={{ label: 'Pagar', onClick: () => {handleSubmit} }} />
+            <BottomNavigation prev={{ label: 'Regresar', to: '/carrito' }} next={{ label: 'Pagar', onClick: () => {handleSubmit()} }} />
 
         </Container>
     )
