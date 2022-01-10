@@ -26,6 +26,23 @@ export function promos(state = initialState, action){
             error: action.payload
         }
 
+    case promoConstants.PROMOS_ADD_REQUEST:
+    return {
+        ...initialState,
+        loading: true
+    }
+
+    case promoConstants.PROMOS_ADD_SUCCESS:
+        return {
+            ...initialState,
+            data: action.payload,
+        }
+
+    case promoConstants.PROMOS_ADD_FAILURE:
+        return {
+            ...initialState,
+            error: action.payload
+        }
     default:
         return state
 
