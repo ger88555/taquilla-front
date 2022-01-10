@@ -22,9 +22,9 @@ function get(id) {
         ))
 }
 
-function pay(id){
+function pay(id, fields){
     return axios
-    .put(`/carts/${id}/pay`)
+    .put(`/carts/${id}/pay`, fields)
     .then(res => {
         const { data } = res
 
