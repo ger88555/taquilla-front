@@ -3,6 +3,7 @@ import { promoService } from '../_services'
 
 export const promoActions = {
     list,
+    addPromo
 }
 
 
