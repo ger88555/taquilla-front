@@ -24,11 +24,11 @@ function get(id) {
 }
 
 function pay(id, fields){
+    
     return axios
         .put(`/carts/${id}/pay`, fields)
         .then(res => {
             const { data } = res
-
             if (data.success === false) {
                 return Promise.reject(res)
             }
