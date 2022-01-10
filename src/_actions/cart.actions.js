@@ -74,8 +74,8 @@ function pay(id, fields){
     return dispatch => {
 
         dispatch(request())
-
-        cartService.get(id, fields)
+        
+        cartService.pay(id, fields)
             .then(
                 data => {
                     dispatch(success(data))
