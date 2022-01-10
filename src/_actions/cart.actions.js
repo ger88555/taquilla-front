@@ -4,6 +4,7 @@ import { cartService, itemService } from '../_services'
 export const cartActions = {
     get,
     add,
+    pay,
 }
 
 
@@ -70,7 +71,7 @@ function get(id){
 }
 
 function pay(id, fields){
-
+    src/_actions/cart.actions.js
     return dispatch => {
 
         dispatch(request())
