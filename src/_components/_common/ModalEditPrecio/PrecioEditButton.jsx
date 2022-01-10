@@ -4,7 +4,7 @@ import { Button, Image } from 'react-bootstrap'
 import pencil from '../../../_assets/pencil.svg'
 import { ModalEditPrecio } from './ModalEditPrecio'
 
-export const PrecioEditButton = ({ exhibition = {}, label = '', variant = 'primary' }) => {
+export const PrecioEditButton = ({ exhibition = {}, variant = 'primary' }) => {
 
     const [showModal, setShowModal] = useState(false)
 
@@ -12,8 +12,8 @@ export const PrecioEditButton = ({ exhibition = {}, label = '', variant = 'prima
         <>
             <ModalEditPrecio show={showModal} onHide={() => setShowModal(false)} exhibition={exhibition} />
 
-            <Button data-testid={`${exhibition.id}-add-to-cart`} className="btn-block fw-bold" variant={variant} onClick={() => setShowModal(true)} >
-                {label} <Image src={pencil} style={{maxWidth:'50px', maxHeight:'50px'}} />
+            <Button data-testid={`${exhibition.id}-add-to-cart`} className="btn-block " variant={variant} onClick={() => setShowModal(true)} >
+                <Image src={pencil} style={{maxWidth:'15px', maxHeight:'15px'}} />Edit
             </Button>
         </>
     )

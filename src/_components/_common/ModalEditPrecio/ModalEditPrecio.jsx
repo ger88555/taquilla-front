@@ -65,14 +65,14 @@ export const ModalEditPrecio = ({ exhibition = {}, onHide = () => {  }, show = f
                         <Col md='12'>
                             <Form className='d-flex'>
                                 <Form.Group >
-                                    <Form.Label >Precio</Form.Label>
-                                    <Form.Control                                
+                                    <Form.Label >Precio $ </Form.Label>
+                                    <input                                
                                         name='precio'
                                         type='number'
                                         value={precio}
                                         onChange={e => setPrecio(e.target.value)}
-                                        style={{width:'100px'}}>
-                                    </Form.Control>MXN
+                                        style={{width:'80px', marginLeft:'5px', marginRight:'5px' }}>
+                                    </input>MXN
                                 </Form.Group>
                             </Form>
                         </Col>
