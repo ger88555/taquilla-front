@@ -3,6 +3,7 @@ import { toHumanReadable } from '../_helpers/timestamps'
 
 export const promoService = {
     list,
+    addPromo
 }
 
 const parsePromo = ({ vigencia, ...rest }) => ({
