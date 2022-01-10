@@ -2,7 +2,6 @@ import React from 'react'
 import { Card, Col } from 'react-bootstrap'
 import { PromoList } from './PromoList'
 import { CartButton } from '../CartButton'
-import { PrecioButton } from '../ModalPrecio/PrecioButton'
 
 
 export const BillboardItem = (props) => {
@@ -13,9 +12,7 @@ export const BillboardItem = (props) => {
         <Col sm="12" md="auto" className="mb-4">
             
             <Card bg="light">
-                {/* TODO: HACER SOLO VISIBLE PARA ADMIN */}
-                
-                <PrecioButton id={id} exhibition={props} />
+
                 <Card.Body>
 
                     <Card.Title><span className='display-6'>{nombre}</span></Card.Title>
