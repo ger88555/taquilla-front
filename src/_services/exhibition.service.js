@@ -30,19 +30,19 @@ function list(params = {}) {
         ))
 }
 
-function editPrice(id, price){
+function editPrice(id, data = {}){
+    // const reqbody = {precio: Number(price)}
     return axios
-        .put(`/exhibitions/${id}`, {price})
+        .put(`/exhibitions/${id}`, data)
         .then(res => {
             const { data } = res
-
             if (data.success === false) {
                 return Promise.reject(res)
             }
 
-            return data.data
+            return data
         })
         .catch(err => (
-            Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud.')
+            Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud. ')
         )) 
 }
