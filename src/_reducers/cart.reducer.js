@@ -21,7 +21,13 @@ export function cart(state = initialState, action){
             ...initialState,
             loading: true
         }
-
+        
+    case cartConstants.CART_PAY_REQUEST:
+            return {
+                ...initialState,
+                loading: true
+            }
+    
     case cartConstants.CART_SUCCESS:
         return {
             ...initialState,
@@ -30,6 +36,15 @@ export function cart(state = initialState, action){
                 ...action.payload
             },
         }
+    case cartConstants.CART_PAY_SUCCESS:
+        return {
+            ...initialState,
+            data: {
+                ...initialState.data,
+                ...action.payload
+            },
+        }
+
 
     case cartConstants.CART_FAILURE:
         return {
@@ -42,7 +57,12 @@ export function cart(state = initialState, action){
             ...state,
             error: action.payload
         }
-
+    case cartConstants.CART_PAY_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            }
+    
     default:
         return state
 
