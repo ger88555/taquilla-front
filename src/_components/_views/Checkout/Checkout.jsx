@@ -21,7 +21,9 @@ const Checkout = ({ get, pay }) => {
         (async () => {
             await pay(id, {no_tarjeta, nombre_cliente, correo})
 
-            navigate('/impresion')
+            localStorage.removeItem('cart_id')
+
+            navigate(`/impresion/${id}`)
         })()
     }
 
@@ -44,7 +46,8 @@ const Checkout = ({ get, pay }) => {
                         <FormGroup controlId="validationCustom01">
                             <FormLabel>Introduzca su nombre</FormLabel>
                             <FormControl 
-                                type="text" 
+                                type="text"
+                                value={nombre_cliente}
                                 onChange={e => setNombre(e.target.value)} 
                                 placeholder="introduzca nombre" required>
                             </FormControl>
@@ -59,7 +62,8 @@ const Checkout = ({ get, pay }) => {
                         <FormGroup controlId="validationCustom02">
                             <FormLabel>Introduzca su numero de Tarjeta</FormLabel>
                             <FormControl 
-                                type="number" 
+                                type="number"
+                                value={no_tarjeta}
                                 onChange={e => setTarjeta(e.target.value)} 
                                 placeholder="introduzca numero de tarjeta" required >
                             </FormControl>
@@ -74,7 +78,8 @@ const Checkout = ({ get, pay }) => {
                         <FormGroup controlId="validationCustom03">
                             <FormLabel>Introduzca su correo</FormLabel>
                             <FormControl 
-                                type="text"  
+                                type="text"
+                                value={correo}
                                 onChange={e => setCorreo(e.target.value)} 
                                 placeholder="introduzca su correo" required >
                             </FormControl>

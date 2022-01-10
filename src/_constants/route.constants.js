@@ -29,7 +29,7 @@ const routes = [
     },
 
     {
-        path: '/impresion',
+        path: '/impresion/:id',
         element: <Printout />
     },
 
