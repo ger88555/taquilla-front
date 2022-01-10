@@ -13,10 +13,9 @@ const Checkout = ({ get, pay }) => {
     const [no_tarjeta, setTarjeta] = useState('')
 
     const [validated, setValidated] = useState(false)
-    const handleSubmit = (event) => {
-        console.log(event)
+    const handleSubmit = () => {
         setValidated(true)
-        
+        console.log(id, {no_tarjeta, nombre_cliente,correo})
         pay(id, {no_tarjeta, nombre_cliente, correo}) 
     }
 
@@ -38,7 +37,10 @@ const Checkout = ({ get, pay }) => {
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom01">
                             <FormLabel>Introduzca su nombre</FormLabel>
-                            <FormControl type="text" onChange={e => setNombre(e.target.value)} placeholder="introduzca nombre" required>
+                            <FormControl 
+                                type="text" 
+                                onChange={e => setNombre(e.target.value)} 
+                                placeholder="introduzca nombre" required>
                             </FormControl>
                         </FormGroup>
                         <FormControl.Feedback type = "invalid"> Introduzca Nombre</FormControl.Feedback>
@@ -50,7 +52,10 @@ const Checkout = ({ get, pay }) => {
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom02">
                             <FormLabel>Introduzca su numero de Tarjeta</FormLabel>
-                            <FormControl type="number" onChange={e => setTarjeta(e.target.value)} placeholder="introduzca numero de tarjeta" required >
+                            <FormControl 
+                                type="number" 
+                                onChange={e => setTarjeta(e.target.value)} 
+                                placeholder="introduzca numero de tarjeta" required >
                             </FormControl>
                         </FormGroup>
                         <FormControl.Feedback type = "invalid"> Introduzca Tarjeta</FormControl.Feedback>
@@ -62,7 +67,10 @@ const Checkout = ({ get, pay }) => {
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom03">
                             <FormLabel>Introduzca su correo</FormLabel>
-                            <FormControl type="text"  onChange={e => setCorreo(e.target.value)} placeholder="introduzca su correo" required >
+                            <FormControl 
+                                type="text"  
+                                onChange={e => setCorreo(e.target.value)} 
+                                placeholder="introduzca su correo" required >
                             </FormControl>
                         </FormGroup>
                         <FormControl.Feedback type = "invalid"> introduzca correo</FormControl.Feedback>
