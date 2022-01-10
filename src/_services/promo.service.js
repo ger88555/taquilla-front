@@ -31,17 +31,18 @@ function list(params = {}) {
 }
 
 function addPromo(fields = {}){
-    post('/promociones', fields)
-    .then(res => {
-        const { data } = res
+    return axios
+        .post('/promociones', fields)
+        .then(res => {
+            const { data } = res
 
-        if (data.success === false) {
-            return Promise.reject(res)
-        }
+            if (data.success === false) {
+                return Promise.reject(res)
+            }
 
-        return data.data.map(parsePromo)
-    })
-    .catch(err => (
-        Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud.')
-    ))
+            return data.data.map(parsePromo)
+        })
+        .catch(err => (
+            Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud.')
+        ))
 }
