@@ -68,3 +68,26 @@ function get(id){
     function failure(error) { return { type: cartConstants.CART_FAILURE, payload: error } }    
 
 }
+
+function pay(id, fields){
+
+    return dispatch => {
+
+        dispatch(request())
+
+        cartService.get(id, fields)
+            .then(
+                data => {
+                    dispatch(success(data))
+                },
+                error => {
+                    dispatch(failure(error))
+                }
+            )
+    }
+
+    function request() { return { type: cartConstants.CART_PAY_REQUEST } }
+    function success(data) { return { type: cartConstants.CART_PAY_SUCCESS, payload: data } }
+    function failure(error) { return { type: cartConstants.CART_PAY_FAILURE, payload: error } }    
+
+}
