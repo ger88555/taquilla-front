@@ -3,6 +3,7 @@ import { exhibitionService, promoService } from '../_services'
 
 export const exhibitionActions = {
     list,
+    editPrice,
 }
 
 const addPromosToList = async (exhibitions) => {
@@ -39,4 +40,24 @@ function list(params = {}){
     function success(data) { return { type: exhibitionConstants.EXHIBITIONS_SUCCESS, payload: data } }
     function failure(error) { return { type: exhibitionConstants.EXHIBITIONS_FAILURE, payload: error } }    
 
-}        
+}
+
+function editPrice(id, data={}){
+    return dispatch => {
+        dispatch(request())
+
+        exhibitionService.editPrice(id, data)
+            .then(
+                data => {
+                    dispatch(success(data))
+                },
+                error => {
+                    dispatch(failure(error))
+                }
+            )
+        
+    }
+    function request() { return { type: exhibitionConstants.EXHIBITIONS_EDIT_REQUEST, payload: {id, data}} }
+    function success(data) { return { type: exhibitionConstants.EXHIBITIONS_EDIT_SUCCESS, payload: data } }
+    function failure(error) { return { type: exhibitionConstants.EXHIBITIONS_EDIT_FAILURE, payload: error } }  
+}
