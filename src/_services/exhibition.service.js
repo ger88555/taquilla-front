@@ -4,6 +4,7 @@ import { toHumanReadable } from '../_helpers/timestamps'
 export const exhibitionService = {
     list,
     editPrice,
+    addNewExhibicion
 }
 
 const parseExhibition = ({ desde, hasta, ...rest }) => ({
@@ -45,4 +46,22 @@ function editPrice(id, data = {}){
         .catch(err => (
             Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud. ')
         )) 
+}
+
+function addNewExhibicion(params = {}) {
+
+    return axios
+        .post('/exhibitions', { params })
+        .then(res => {
+            const { data } = res
+
+            if (data.success === false) {
+                return Promise.reject(res)
+            }
+
+            return data.data.map(parseExhibition)
+        })
+        .catch(err => (
+            Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud.')
+        ))
 }
