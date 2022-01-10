@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { cartActions } from '../../../_actions'
 import { BottomNavigation } from '../../_common/BottomNavigation'
 
 const Checkout = ({ get, pay }) => {
     const [id] = useState(localStorage.getItem('cart_id') || null)
     const reload = useCallback(() => get(id), [])
+    const navigate = useNavigate()
 
     const [nombre_cliente, setNombre] = useState('')
     const [correo, setCorreo] = useState('')
@@ -14,9 +16,13 @@ const Checkout = ({ get, pay }) => {
 
     const [validated, setValidated] = useState(false)
     const handleSubmit = () => {
-        setValidated(true)
-        console.log(id, {no_tarjeta, nombre_cliente,correo})
-        pay(id, {no_tarjeta, nombre_cliente, correo}) 
+        setValidated(true);
+
+        (async () => {
+            await pay(id, {no_tarjeta, nombre_cliente, correo})
+
+            navigate('/impresion')
+        })()
     }
 
     useEffect(() => {
