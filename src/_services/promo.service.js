@@ -28,3 +28,19 @@ function list(params = {}) {
             Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud.')
         ))
 }
+
+function addPromo(fields = {}){
+    post('/promociones', fields)
+    .then(res => {
+        const { data } = res
+
+        if (data.success === false) {
+            return Promise.reject(res)
+        }
+
+        return data.data.map(parsePromo)
+    })
+    .catch(err => (
+        Promise.reject(err.data?.message || 'Hubo un error al realizar la solicitud.')
+    ))
+}
