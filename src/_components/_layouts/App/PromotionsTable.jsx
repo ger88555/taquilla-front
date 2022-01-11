@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { promoActions } from '../../../_actions'
+import { NewPromoButton } from '../../_common/ModalNewPromo/NewPromoButton'
 
 import {Table} from '../../_common/Table'
 import { 
@@ -59,6 +60,7 @@ export const PromotionsTable = () => {
 
     return (
         <>
+            <NewPromoButton/>
             <Table columns={columns} data={data}/>
 
             {/* <NewExhibicionButton /> */}

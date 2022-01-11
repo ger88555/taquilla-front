@@ -10,13 +10,11 @@ import { useNavigate } from 'react-router-dom'
 import { exhibitionActions } from '../../../_actions'
 
 
-export const ModalNewExhibicion = ({ onHide = () => {  }, show = false, error}) => {
+export const ModalNewPromo = ({ onHide = () => {  }, show = false, error}) => {
     const initialForm = {
-        nombreEx:'',
-        descripcion:'',
-        fechaInicial:'',
-        fechaFinal:'',
-        precio:''
+        vigencia:'',
+        dscto:'',
+
     }
     const [form, setForm] = useState(initialForm)
 
@@ -52,7 +50,7 @@ export const ModalNewExhibicion = ({ onHide = () => {  }, show = false, error}) 
                         <Row>
                             <Col>
                                 <Modal.Title>
-                                    <h1>Nueva Exhibición</h1>
+                                    <h1>Nueva promoción</h1>
                                 </Modal.Title>
                             </Col>
                         </Row>
@@ -74,59 +72,36 @@ export const ModalNewExhibicion = ({ onHide = () => {  }, show = false, error}) 
 
                 <Modal.Body>
                     <Container>
+
                         <Row>
                             <Col>
-                                <Form.Label>Nombre de la exhibición</Form.Label>
+                                <Form.Label>Descuento %</Form.Label>
                                 <Form.Control
-                                    name='nombreEx'
-                                    type='text'
-                                    value={form.nombreEx}
-                                    onChange={handleChange}
-                                />
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <Form.Label>Descripción</Form.Label>
-                                <Form.Control 
-                                    name='descripcion'
-                                    type='text'
-                                    value={form.descripcion}
-                                    onChange={handleChange}
-                                />
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <Form.Label>Fecha inicial</Form.Label>
-                                <Form.Control 
-                                    name='fechaInicial'
-                                    type='date'
-                                    value={form.fechaInicial}
-                                    onChange={handleChange}
-                                />
-                            </Col>
-
-                            <Col>
-                                <Form.Label>Fecha final</Form.Label>
-                                <Form.Control 
-                                    name='fechaFinal'
-                                    type='date'
-                                    value={form.fechaFinal}
-                                    onChange={handleChange}
-                                />
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <Form.Label>Precio</Form.Label>
-                                <Form.Control 
-                                    name='precio'
+                                    name='dscto'
                                     type='number'
-                                    value={form.precio}
+                                    value={form.dscto}
+                                    onChange={handleChange}
+                                />
+                            </Col>
+                            <Col>
+                                <Form.Label>Vigencia </Form.Label>
+                                <Form.Control 
+                                    name='vigencia'
+                                    type='date'
+                                    value={form.vigencia}
+                                    onChange={handleChange}
+                                />
+                            </Col>
+
+                        </Row>
+
+                        <Row>
+                            <Col>
+                                <Form.Label>Dias vigentes </Form.Label>
+                                <Form.Control 
+                                    name='vigencia'
+                                    type='text'
+                                    value={form.vigencia}
                                     onChange={handleChange}
                                 />
                             </Col>
