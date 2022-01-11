@@ -68,11 +68,9 @@ export const ExhibitionsTable = () => {
         []
     )
 
-    const data = React.useMemo(() => rows, [])
-
     return (
         <>
-            <Table columns={columns} data={data} />
+            <Table columns={columns} data={rows} />
         </>
         
     )
