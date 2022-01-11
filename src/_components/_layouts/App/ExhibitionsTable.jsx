@@ -8,7 +8,6 @@ import {
 } from 'react-redux'
 // import { ModalEditPrecio } from '../../_common/ModalEditPrecio'
 import { PrecioEditButton } from '../../_common/ModalEditPrecio/PrecioEditButton'
-import { NewExhibicionButton } from '../../_common/ModalNewExhibicion/NewExhibicionButton'
 export const ExhibitionsTable = () => {
     //id  | nombre                          | descripcion | desde      | hasta      | precio
     const dispatch = useDispatch()
@@ -57,10 +56,11 @@ export const ExhibitionsTable = () => {
                     const exhibitionFields = props.row.original
                 
                     return (
-                        <PrecioEditButton
-                            exhibition={exhibitionFields}
-                        />
-                        
+                        <>
+                            <PrecioEditButton
+                                exhibition={exhibitionFields}
+                            />
+                        </>
                     )
                 },
             }
@@ -72,9 +72,7 @@ export const ExhibitionsTable = () => {
 
     return (
         <>
-            <Table columns={columns} data={data}/>
-
-            <NewExhibicionButton />
+            <Table columns={columns} data={data} />
         </>
         
     )
