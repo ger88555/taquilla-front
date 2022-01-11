@@ -20,7 +20,7 @@ function add(exhibition_id, promo_id = null){
 
         dispatch(request())
 
-        itemService.add(data)
+        return itemService.add(data)
             .then(
                 data => {
                     // Save the cart id for future page loads.
@@ -75,7 +75,7 @@ function pay(id, fields){
 
         dispatch(request())
         
-        cartService.pay(id, fields)
+        return cartService.pay(id, fields)
             .then(
                 data => {
                     dispatch(success(data))
