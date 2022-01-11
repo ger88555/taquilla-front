@@ -16,7 +16,7 @@ export const toHumanReadable = (weekdays) => weekdays.map(d => readableDays[d]).
  * @returns {Boolean}
  */
 export const hasCurrentDayOfWeek = (weekdays) => {
-    const current = moment().format('ddd').toLowerCase()
+    const current = moment().locale('en').format('ddd').toLowerCase()
 
     return weekdays.filter(d => d.toLowerCase() === current).length !== 0
 }
