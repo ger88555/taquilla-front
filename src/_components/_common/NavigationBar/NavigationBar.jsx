@@ -29,6 +29,11 @@ function NavigationBar() {
                         <Nav.Link onClick={() => navigate('/admin')}>Administración de Exhibiciones</Nav.Link>
                     </Nav>
                 }
+                {getRoleId() === 2 &&
+                    <Nav className="me-auto">
+                        <Nav.Link onClick={() => navigate('/promos')}>Administración de Promociones</Nav.Link>
+                    </Nav>
+                }
                 {getRoleId() === 1 &&
                     <Nav className="me-auto">
                         <Nav.Link onClick={() => navigate('/worker')}>Exhibiciones</Nav.Link>
