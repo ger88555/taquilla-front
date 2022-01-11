@@ -11,7 +11,7 @@ const Checkout = ({ get, pay }) => {
     const navigate = useNavigate()
 
     const [nombre_cliente, setNombre] = useState('')
-    const [correo, setCorreo] = useState('')
+    // const [correo, setCorreo] = useState('')
     const [no_tarjeta, setTarjeta] = useState('')
 
     const [validated, setValidated] = useState(false)
@@ -19,7 +19,7 @@ const Checkout = ({ get, pay }) => {
         setValidated(true);
 
         (async () => {
-            await pay(id, {no_tarjeta, nombre_cliente, correo})
+            await pay(id, {no_tarjeta, nombre_cliente/*, correo*/})
 
             localStorage.removeItem('cart_id')
 
@@ -40,7 +40,7 @@ const Checkout = ({ get, pay }) => {
                 </Col>
             </Row>
 
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center mb-1">
                 <Col className='text-center' sm = {3}>
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom01">
@@ -56,7 +56,7 @@ const Checkout = ({ get, pay }) => {
                     </Form>
                 </Col>   
             </Row>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center mb-4">
                 <Col className='text-center' sm = {3}>
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom02">
@@ -72,7 +72,7 @@ const Checkout = ({ get, pay }) => {
                     </Form>
                 </Col>
             </Row>
-            <Row className="justify-content-md-center">
+            {/* <Row className="justify-content-md-center">
                 <Col className='text-center' sm = {3}>
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom03">
@@ -87,7 +87,7 @@ const Checkout = ({ get, pay }) => {
                         <FormControl.Feedback type = "invalid"> introduzca correo</FormControl.Feedback>
                     </Form>
                 </Col>
-            </Row>
+            </Row> */}
 
             <BottomNavigation prev={{ label: 'Regresar', to: '/carrito' }} next={{ label: 'Pagar', onClick: () => {handleSubmit()} }} />
 
