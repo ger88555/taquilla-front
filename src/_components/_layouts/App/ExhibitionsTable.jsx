@@ -8,6 +8,8 @@ import {
 } from 'react-redux'
 // import { ModalEditPrecio } from '../../_common/ModalEditPrecio'
 import { PrecioEditButton } from '../../_common/ModalEditPrecio/PrecioEditButton'
+import { Button, Col, Row, Image, Container } from 'react-bootstrap'
+import retry from '../../../_assets/retry.svg'
 export const ExhibitionsTable = () => {
     //id  | nombre                          | descripcion | desde      | hasta      | precio
     const dispatch = useDispatch()
@@ -20,7 +22,7 @@ export const ExhibitionsTable = () => {
     const columns = React.useMemo(
         () => [
             {
-                Header: 'Exhibiciones',
+                Header: 'Todas las Exhibiciones',
                 columns: [
                     {
                         Header: 'ID',
@@ -70,6 +72,21 @@ export const ExhibitionsTable = () => {
 
     return (
         <>
+            <Container>
+                <Row>
+                    
+                    <Col>
+                        <h1>Exhibiciones</h1>
+                    </Col>
+                    
+                    <Col sm="auto">
+                        <Button onClick={reload} size='lg' className='my-1' title='Recargar listado.'>
+                            <Image src={retry} style={{ height: '1.2em' }} /> Recargar
+                        </Button>
+                    </Col>
+
+                </Row>
+            </Container>
             <Table columns={columns} data={rows} />
         </>
         
