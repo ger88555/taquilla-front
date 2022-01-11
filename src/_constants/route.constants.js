@@ -5,6 +5,8 @@ import { Cart } from '../_components/_views/Cart'
 import { Checkout } from '../_components/_views/Checkout'
 import { RequireAuth} from '../_components/_common/RequireAuth/RequireAuth'
 import { Printout } from '../_components/_views/Printout'
+import { Promotions } from '../_components/_views/Promotions'
+
 import { ExhibitionsTable } from '../_components/_layouts/App/ExhibitionsTable'
 
 const routes = [
@@ -38,6 +40,13 @@ const routes = [
         element: 
             <RequireAuth rol_id='2'>
                 <ExhibitionsTable/>
+            </RequireAuth>
+    },
+    {
+        path: '/promos',
+        element: 
+            <RequireAuth rol_id='2'>
+                <Promotions/>
             </RequireAuth>
     },
 
