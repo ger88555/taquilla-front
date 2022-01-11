@@ -30,7 +30,7 @@ function login(usuario, password){
         userService.login(usuario, password)
             .then(
                 ({ user, token }) => {
-                    localStorage.setItem('user', JSON.stringify(user))
+                    localStorage.setItem('user', JSON.stringify({ ...user, token }))
                     dispatch(success(user))
                     setAuth(token)
                     
