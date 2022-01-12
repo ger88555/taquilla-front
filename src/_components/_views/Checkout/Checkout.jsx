@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap'
+import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Alert } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { cartActions } from '../../../_actions'
 import { BottomNavigation } from '../../_common/BottomNavigation'
 
-const Checkout = ({ get, pay }) => {
+const Checkout = ({ get, pay, data, error }) => {
     const [id] = useState(localStorage.getItem('cart_id') || null)
     const reload = useCallback(() => get(id), [])
     const navigate = useNavigate()
@@ -19,17 +19,22 @@ const Checkout = ({ get, pay }) => {
         setValidated(true);
 
         (async () => {
-            await pay(id, {no_tarjeta, nombre_cliente/*, correo*/})
-
-            localStorage.removeItem('cart_id')
-
-            navigate(`/impresion/${id}`)
+            await pay(id, { no_tarjeta, nombre_cliente/*, correo*/ })
         })()
     }
 
     useEffect(() => {
         reload()
     }, [])
+
+    useEffect(() => {
+        // Redirect if payment success
+        if (typeof data.pago_de_pedido_id === 'number') {
+            navigate(`/impresion/${id}`)
+            
+            localStorage.removeItem('cart_id')
+        }
+    }, [data.pago_de_pedido_id])
 
     return (
         <Container>
@@ -40,35 +45,44 @@ const Checkout = ({ get, pay }) => {
                 </Col>
             </Row>
 
+            {error && (
+                <Row>
+                    <Col>
+                        <Alert variant='danger'>
+                            {error}
+                        </Alert>
+                    </Col>
+                </Row>
+            )}
             <Row className="justify-content-md-center mb-1">
-                <Col className='text-center' sm = {3}>
+                <Col className='text-center' sm={3}>
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom01">
                             <FormLabel>Introduzca su nombre</FormLabel>
-                            <FormControl 
+                            <FormControl
                                 type="text"
                                 value={nombre_cliente}
-                                onChange={e => setNombre(e.target.value)} 
+                                onChange={e => setNombre(e.target.value)}
                                 placeholder="introduzca nombre" required>
                             </FormControl>
                         </FormGroup>
-                        <FormControl.Feedback type = "invalid"> Introduzca Nombre</FormControl.Feedback>
+                        <FormControl.Feedback type="invalid"> Introduzca Nombre</FormControl.Feedback>
                     </Form>
-                </Col>   
+                </Col>
             </Row>
             <Row className="justify-content-md-center mb-4">
-                <Col className='text-center' sm = {3}>
+                <Col className='text-center' sm={3}>
                     <Form noValidate validated={validated}>
                         <FormGroup controlId="validationCustom02">
                             <FormLabel>Introduzca su numero de Tarjeta</FormLabel>
-                            <FormControl 
+                            <FormControl
                                 type="number"
                                 value={no_tarjeta}
-                                onChange={e => setTarjeta(e.target.value)} 
+                                onChange={e => setTarjeta(e.target.value)}
                                 placeholder="introduzca numero de tarjeta" required >
                             </FormControl>
                         </FormGroup>
-                        <FormControl.Feedback type = "invalid"> Introduzca Tarjeta</FormControl.Feedback>
+                        <FormControl.Feedback type="invalid"> Introduzca Tarjeta</FormControl.Feedback>
                     </Form>
                 </Col>
             </Row>
@@ -89,12 +103,12 @@ const Checkout = ({ get, pay }) => {
                 </Col>
             </Row> */}
 
-            <BottomNavigation prev={{ label: 'Regresar', to: '/carrito' }} next={{ label: 'Pagar', onClick: () => {handleSubmit()} }} />
+            <BottomNavigation prev={{ label: 'Regresar', to: '/carrito' }} next={{ label: 'Pagar', onClick: () => { handleSubmit() } }} />
 
         </Container>
     )
 }
 
-const connectedCheckout = connect((state) => (state.cart.data), { ...cartActions })(Checkout)
+const connectedCheckout = connect((state) => (state.cart), { ...cartActions })(Checkout)
 
 export { connectedCheckout as Checkout }

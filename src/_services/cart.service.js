@@ -38,7 +38,7 @@ function pay(id, fields){
             return data.data
         })
         .catch(err => (
-            Promise.reject(err.data?.message || 'Hubo un error al solicitar los datos del pedido.')
+            Promise.reject(err.data?.message || 'No ha sido posible realizar el pago de pedido. Verifique la información de pago proporcionada.')
         ))
 }
 
